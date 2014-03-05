@@ -15,14 +15,14 @@ class Event:
                 self.event_type = values[0]
                 self.country = values[1]
                 self.state = values[2]
-                self.city = values[3
+                self.city = values[3]
                 self.name = values[4]
                 self.day = values[5]
                 self.month = values[6]
                 self.year = values[7]
 
         def formated_string(self):
-                return ''+self.url+'|'+ self.event_type+'|'+ self.country+'|'+self.state+'|'+ self.city+'|'+self.name+'|'+str(self.day)+'|'+str(self.month)+'|'+str(self.year)
+                return ''+self.url+'|'+ self.event_type+'|'+ self.country+'|'+self.state+'|'+ self.city+'|'+self.name+'|'+str(self.day)+'|'+str(self.month)+'|'+str(self.year)+'\n'
 
         def set_url(self, urlToSet):
             self.url = urlToSet 

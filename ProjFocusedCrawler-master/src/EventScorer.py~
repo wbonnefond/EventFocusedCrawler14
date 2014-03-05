@@ -17,10 +17,13 @@ from Filter import *
 
 class EventScorer:
         
+        last_run_file = 'last-run-trees.txt'
+
         def __init__(self):
                 self.base_event = event.Event()
                 self.current_event = event.Event()
                 self.base_event.load_from_file('event-details.txt')
+                self.threshold = 0
 
                 days_file = open("days.txt", "r")
                 self.days_of_week_list = days_file.read().splitlines()
@@ -37,8 +40,18 @@ class EventScorer:
                 countries_file = open("countries.txt", "r")
                 self.country_list = countries_file.read().splitlines()
                 countries_file.close()
-                self.state_list = open("us-states.txt", "r").read().splitlines()
+                state_list_file = open("us-states.txt", "r")
+                self.state_list = state_list_file.read().splitlines()
+                state_list_file.close()
+
                 self.sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
+
+                # reset last-run-trees.txt
+                f = open(last_run_file, 'w')
+                f.close()
+
+        def set_threshold(self, thresh):
+            self.threshold = thresh
         
         def calculate_score(self, page_text, url):
                 self.current_event.clear_data()
@@ -52,7 +65,12 @@ class EventScorer:
                         return 1
                 self.current_event.to_string()
                 #print 1.0/(1.1423*simp_dist)
-                return 1.0/(1.1423*simp_dist)
+                score = 1.0/(1.1423*simp_dist)
+                if score > self.threshold:
+                    f = open(last_run_file, 'a')
+                    f.write(self.current_event.formated_string())
+                    f.close()
+                return score
 
         def calculate_smart_score(self, page_text, url):
                 self.current_event.clear_data()
@@ -107,7 +125,12 @@ class EventScorer:
                 #print "date_contrib: " + str(date_contrib)
                 #print "simp_dist: " + str(simp_dist)
                 #print (.2*date_contrib) + (.8*simp_dist)
-                return (.2*date_contrib) + (.8*simp_dist)
+                score = (.2*date_contrib) + (.8*simp_dist)
+                if score > self.threshold:
+                    f = open(last_run_file, 'a')
+                    f.write(self.current_event.formated_string())
+                    f.close()
+                return score
 
         def build_event(self, page_text):
                 self.set_event_date(page_text, self.current_event)

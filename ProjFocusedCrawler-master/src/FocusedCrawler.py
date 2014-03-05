@@ -281,6 +281,8 @@ def testEventFC(seedFile, pLimit):
     pagesLimit = pLimit
     pageScoreThreshold = 0.5
     urlScoreThreshold = 0.4
+    # set threshold so scorer knows when to print tree to file
+    myEventScorer.set_threshold(pageScoreThreshold)
     options = {"num_pages": pagesLimit,"pageScoreThreshold":pageScoreThreshold,"urlScoreThreshold":urlScoreThreshold , "seeds":seedURLs}
     cleandocs = getTokenizedDocs(docs)
     mytfidf.buildModel(cleandocs)

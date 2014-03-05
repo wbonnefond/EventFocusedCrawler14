@@ -247,7 +247,6 @@ def getSeedURLs(fileName):
 
 def testBaseFC(seedFile, pLimit):
     print 'Content-Type: text/plain\n\n'
-    writeArgsToFile()
     mytfidf = TFIDF()
     myEventScorer = EventScorer.EventScorer()
     docs = downloadRawDocs(seedFile)
