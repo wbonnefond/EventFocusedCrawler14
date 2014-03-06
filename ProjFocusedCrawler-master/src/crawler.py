@@ -48,7 +48,7 @@ class Crawler:
                 self.relevantPagesCount += 1
                 self.relevantPages.append(page)
                 self.harvestRatioData.append((self.relevantPagesCount,self.pagesCount))
-                print ("%s,"+ str(page_score)+", %s") % (-1 * work_url[0], work_url[1])
+                print ("%s|"+ str(page_score)+"|%s") % (-1.0 * work_url[0], work_url[1])
                 for link in page.outgoingUrls:
                     url = link.address
                     if url != None and url != '':
@@ -128,7 +128,7 @@ class Crawler:
                         self.relevantPagesCount += 1
                         self.relevantPages.append(page)
                         self.harvestRatioData.append((self.relevantPagesCount,self.pagesCount))
-                        print ("%s,"+ str(page_score)+", %s") % (-1 * work_url[0], work_url[1])
+                        print ("%s|"+ str(page_score)+"|%s") % (-1.0 * work_url[0], work_url[1])
                         for link in page.outgoingUrls:
                             url = link.address
                             if url != None and url != '':

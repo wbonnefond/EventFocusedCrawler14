@@ -251,6 +251,7 @@ def testBaseFC(seedFile, pLimit):
     myEventScorer = EventScorer.EventScorer()
     docs = downloadRawDocs(seedFile)
     seedURLs = getSeedURLs(seedFile)
+    print seedURLs
     pagesLimit = pLimit
     pageScoreThreshold = 0.5
     urlScoreThreshold = 0.4
@@ -278,6 +279,7 @@ def testEventFC(seedFile, pLimit):
     myEventScorer = EventScorer.EventScorer()
     docs = downloadRawDocs(seedFile)
     seedURLs = getSeedURLs(seedFile)
+    print seedURLs
     pagesLimit = pLimit
     pageScoreThreshold = 0.5
     urlScoreThreshold = 0.4
